@@ -1,0 +1,466 @@
+/* ============================================================
+   global.fukuo.jp — Mock ver2
+   モバイルファースト / Instagram風スクロールUI
+   ============================================================ */
+
+/* ── Reset / Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-primary:    #C8102E;
+  --color-primary-dk: #A00D24;
+  --color-white:      #FFFFFF;
+  --color-text:       #2C2C2C;
+  --color-text-muted: #6B6B6B;
+  --color-earth:      #D4C4A8;
+  --color-earth-dk:   #8C7355;
+  --color-overlay:    rgba(0,0,0,0.55);
+
+  --font-sans:  'Noto Sans JP', sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+
+  --transition: 0.22s ease;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  background: #000;
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
+}
+
+/* ============================================================
+   HEADER（固定）
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 1.25rem 0.75rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+}
+.site-logo span { color: var(--color-primary); }
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.header-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition);
+  backdrop-filter: blur(4px);
+}
+.header-icon-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* ============================================================
+   FEED（縦スクロール — ブランド切替）
+   ============================================================ */
+.feed {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.feed::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   BRAND ROW（1ブランド = 画面1枚分）
+   ============================================================ */
+.brand-row {
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   BRAND SLIDES（横スクロール — ブランド詳細）
+   ============================================================ */
+.brand-slides {
+  display: flex;
+  height: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.brand-slides::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   PANEL 共通
+   ============================================================ */
+.panel {
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   PANEL 1 — ブランドメイン
+   ============================================================ */
+.panel--main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* 背景（プレースホルダー） */
+.panel-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #4a3728 0%, #2c1a1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel-bg__label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+}
+
+/* ブランドごとの背景色 */
+.brand-row:nth-child(1) .panel-bg { background: linear-gradient(135deg, #3a2828 0%, #1e1010 100%); }
+.brand-row:nth-child(2) .panel-bg { background: linear-gradient(135deg, #1e2a3a 0%, #0e1520 100%); }
+.brand-row:nth-child(3) .panel-bg { background: linear-gradient(135deg, #2a3a28 0%, #101e10 100%); }
+
+/* 下からのグラデーションオーバーレイ */
+.panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.4) 45%,
+    transparent 75%
+  );
+}
+
+/* メインコンテンツ（下部） */
+.main-content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 5rem);
+}
+
+.brand-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: rgba(200,16,46,0.15);
+  border: 1px solid rgba(200,16,46,0.4);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 8vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-desc {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  max-width: 320px;
+}
+
+/* ボタングループ */
+.brand-actions {
+  display: flex;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  min-height: 44px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  font-family: var(--font-sans);
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  flex: 1;
+}
+.btn--primary:active { background: var(--color-primary-dk); transform: scale(0.97); }
+
+.btn--outline {
+  background: rgba(255,255,255,0.12);
+  color: var(--color-white);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  flex: 1;
+  backdrop-filter: blur(4px);
+}
+.btn--outline:active { background: rgba(255,255,255,0.22); transform: scale(0.97); }
+
+/* 横スワイプ誘導インジケーター */
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+}
+.swipe-hint__dots {
+  display: flex;
+  gap: 4px;
+}
+.swipe-hint__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background var(--transition);
+}
+.swipe-hint__dot--active {
+  background: var(--color-white);
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   PANEL 2 — 商品一覧
+   ============================================================ */
+.panel--products {
+  background: #0e0e0e;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  padding: 5.5rem 1.25rem 1rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+  flex-shrink: 0;
+}
+
+.panel-header__back {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
+}
+
+.panel-header__brand {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.panel-header__title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* 商品スクロール領域 */
+.products-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  scrollbar-width: none;
+}
+.products-scroll::-webkit-scrollbar { display: none; }
+
+/* 商品カードリスト */
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.product-item {
+  display: flex;
+  gap: 0.875rem;
+  background: #1a1a1a;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.product-item__img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #3a3020 0%, #2a2010 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+
+.product-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-item__cat {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.2rem;
+}
+
+.product-item__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-item__price {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* トレンドセクション */
+.trend-section {
+  margin-top: 1.5rem;
+}
+
+.trend-section__title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.trend-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.trend-tag {
+  padding: 0.35rem 0.85rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ============================================================
+   縦スクロール誘導インジケーター（画面右）
+   ============================================================ */
+.feed-indicator {
+  position: fixed;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.feed-indicator__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: all 0.3s ease;
+}
+.feed-indicator__dot.is-active {
+  height: 16px;
+  border-radius: 2px;
+  background: var(--color-white);
+}
+
+/* ============================================================
+   次のブランドへの下矢印（最初のブランドのみ表示）
+   ============================================================ */
+.scroll-down-hint {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  right: 1.25rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  pointer-events: none;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1; }
+}
+
+.scroll-down-hint svg { opacity: 0.6; }
