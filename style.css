@@ -93,6 +93,86 @@ html, body {
 .header-icon-btn:hover { background: rgba(255,255,255,0.25); }
 
 /* ============================================================
+   DRAWER NAV
+   ============================================================ */
+.site-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.site-nav.is-open {
+  pointer-events: auto;
+}
+
+/* オーバーレイ */
+.site-nav__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s ease;
+}
+.site-nav.is-open .site-nav__overlay {
+  background: rgba(0,0,0,0.6);
+}
+
+/* ドロワー本体 */
+.site-nav__drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(280px, 80vw);
+  height: 100%;
+  background: #111;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 1.75rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.site-nav.is-open .site-nav__drawer {
+  transform: translateX(0);
+}
+
+/* ナビリスト */
+.site-nav__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.site-nav__link {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.site-nav__link:hover,
+.site-nav__link.is-current {
+  color: var(--color-primary);
+}
+
+.site-nav__label {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: inherit;
+}
+
+/* コピーライト */
+.site-nav__copy {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
    FEED（縦スクロール — ブランド切替）
    ============================================================ */
 .feed {

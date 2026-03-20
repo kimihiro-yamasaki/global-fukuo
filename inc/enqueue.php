@@ -25,7 +25,16 @@ function global_fukuo_enqueue() {
         get_template_directory_uri() . '/js/feed.js',
         [],
         wp_get_theme()->get('Version'),
-        true // フッターに出力
+        true
+    );
+
+    // ナビゲーションJS
+    wp_enqueue_script(
+        'global-fukuo-nav',
+        get_template_directory_uri() . '/js/nav.js',
+        [],
+        wp_get_theme()->get('Version'),
+        true
     );
 }
 add_action( 'wp_enqueue_scripts', 'global_fukuo_enqueue' );
