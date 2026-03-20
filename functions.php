@@ -11,5 +11,13 @@ function global_fukuo_setup() {
 }
 add_action( 'after_setup_theme', 'global_fukuo_setup' );
 
+// スラッグ about のページで body に page-about クラスを付与
+add_filter( 'body_class', function( $classes ) {
+    if ( is_page( 'about' ) ) {
+        $classes[] = 'page-about';
+    }
+    return $classes;
+} );
+
 // インクルード
 require_once get_template_directory() . '/inc/enqueue.php';

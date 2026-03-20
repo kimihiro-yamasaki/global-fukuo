@@ -479,7 +479,8 @@ html, body {
    ============================================================ */
 
 /* Aboutページでは通常スクロールに戻す */
-body.page-template-page-about {
+html:has(body.page-about),
+body.page-about {
   height: auto;
   overflow-x: hidden;
   overflow-y: auto;
