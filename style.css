@@ -504,7 +504,8 @@ body.page-about {
 /* ── HERO ── */
 .about-hero {
   position: relative;
-  height: 100dvh;
+  height: 60vh;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
