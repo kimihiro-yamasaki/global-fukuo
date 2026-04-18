@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#2a2a2a"/>
+  <!-- Neck -->
+  <rect x="82" y="140" width="36" height="24" rx="4" fill="#c49565"/>
+  <!-- Shoulders / Shirt -->
+  <ellipse cx="100" cy="195" rx="70" ry="45" fill="#333"/>
+  <ellipse cx="100" cy="195" rx="68" ry="43" fill="#444"/>
+  <!-- Collar -->
+  <path d="M80 168 L100 180 L120 168" fill="none" stroke="#555" stroke-width="2"/>
+  <!-- Face -->
+  <ellipse cx="100" cy="105" rx="48" ry="55" fill="#c49565"/>
+  <!-- Ears -->
+  <ellipse cx="52" cy="108" rx="8" ry="12" fill="#b88555"/>
+  <ellipse cx="148" cy="108" rx="8" ry="12" fill="#b88555"/>
+  <!-- Hair - back layer -->
+  <path d="M46 98 Q46 40 100 36 Q154 40 154 98 Q154 75 140 58 Q120 40 100 40 Q80 40 60 58 Q46 75 46 98 Z" fill="#111"/>
+  <!-- Hair - top volume -->
+  <path d="M48 92 Q48 43 100 38 Q152 43 152 92 L150 82 Q146 55 100 47 Q54 55 50 82 Z" fill="#1a1a1a"/>
+  <!-- Hair - left side, slightly longer -->
+  <path d="M46 98 Q44 110 48 120 Q46 108 50 96 Z" fill="#111"/>
+  <!-- Hair - right side -->
+  <path d="M154 98 Q156 110 152 120 Q154 108 150 96 Z" fill="#111"/>
+  <!-- Fringe - casual wavy, covering forehead -->
+  <path d="M50 82 Q58 58 82 52 Q70 62 58 78 Z" fill="#111"/>
+  <path d="M58 78 Q72 54 105 50 Q90 58 75 74 Z" fill="#111"/>
+  <path d="M105 50 Q130 48 148 62 Q135 56 120 58 Q110 55 105 50 Z" fill="#111"/>
+  <!-- Eyebrows -->
+  <path d="M72 92 Q82 86 93 90" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <path d="M107 90 Q118 86 128 92" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <ellipse cx="82" cy="102" rx="7" ry="8" fill="#fff"/>
+  <ellipse cx="118" cy="102" rx="7" ry="8" fill="#fff"/>
+  <ellipse cx="83" cy="103" rx="5" ry="5.5" fill="#1a1008"/>
+  <ellipse cx="119" cy="103" rx="5" ry="5.5" fill="#1a1008"/>
+  <ellipse cx="84" cy="101" rx="2" ry="2" fill="#fff"/>
+  <ellipse cx="120" cy="101" rx="2" ry="2" fill="#fff"/>
+  <!-- Nose -->
+  <path d="M96 108 Q100 118 104 108" fill="none" stroke="#a07848" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Mouth - friendly smile -->
+  <path d="M86 124 Q100 134 114 124" fill="none" stroke="#a06858" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

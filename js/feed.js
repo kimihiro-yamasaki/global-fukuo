@@ -13,19 +13,3 @@ const rowObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 rows.forEach(row => rowObserver.observe(row));
-
-// 横スワイプドット更新
-document.querySelectorAll('.brand-slides').forEach(slides => {
-  const dotActive = slides.closest('.brand-row').querySelector('.swipe-hint__dot--active');
-  const dotNext   = slides.closest('.brand-row').querySelector('.swipe-hint__dot:not(.swipe-hint__dot--active)');
-
-  slides.addEventListener('scroll', () => {
-    const atStart = slides.scrollLeft < slides.offsetWidth * 0.5;
-    if (dotActive && dotNext) {
-      dotActive.style.background = atStart ? 'white'                  : 'rgba(255,255,255,0.25)';
-      dotNext.style.background   = atStart ? 'rgba(255,255,255,0.25)' : 'white';
-      dotActive.style.width      = atStart ? '18px' : '6px';
-      dotNext.style.width        = atStart ? '6px'  : '18px';
-    }
-  });
-});

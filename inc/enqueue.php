@@ -12,28 +12,31 @@ function global_fukuo_enqueue() {
     );
 
     // テーマスタイル
+    $style_path = get_stylesheet_directory() . '/style.css';
     wp_enqueue_style(
         'global-fukuo-style',
         get_stylesheet_uri(),
         ['global-fukuo-fonts'],
-        wp_get_theme()->get('Version')
+        file_exists( $style_path ) ? filemtime( $style_path ) : wp_get_theme()->get('Version')
     );
 
     // フィードJS
+    $feed_js = get_template_directory() . '/js/feed.js';
     wp_enqueue_script(
         'global-fukuo-feed',
         get_template_directory_uri() . '/js/feed.js',
         [],
-        wp_get_theme()->get('Version'),
+        file_exists( $feed_js ) ? filemtime( $feed_js ) : wp_get_theme()->get('Version'),
         true
     );
 
     // ナビゲーションJS
+    $nav_js = get_template_directory() . '/js/nav.js';
     wp_enqueue_script(
         'global-fukuo-nav',
         get_template_directory_uri() . '/js/nav.js',
         [],
-        wp_get_theme()->get('Version'),
+        file_exists( $nav_js ) ? filemtime( $nav_js ) : wp_get_theme()->get('Version'),
         true
     );
 }
