@@ -22,7 +22,7 @@ $members = [
         'role'   => 'Influencer',
         'origin' => 'Jakarta',
         'image'  => $theme_uri . '/images/team/ryo.jpg',
-        'desc'   => '9 tahun di Jepang, hobi mengikuti tren fashion lokal Jepang. Ingin mengenalkan fashion culture ke ranah global.',
+        'desc'   => 'Sama dengan Kimi, Orang Jepang asli. Tapi lagi jadi influencer terkenal di Jakarta. Suka bagi bagi certia fashion dan hal unik dari Jepang!',
     ],
     [
         'name'   => 'Rifan',

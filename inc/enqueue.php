@@ -39,5 +39,15 @@ function global_fukuo_enqueue() {
         file_exists( $nav_js ) ? filemtime( $nav_js ) : wp_get_theme()->get('Version'),
         true
     );
+
+    // Contactモーダル制御JS
+    $contact_modal_js = get_template_directory() . '/js/contact-modal.js';
+    wp_enqueue_script(
+        'global-fukuo-contact-modal',
+        get_template_directory_uri() . '/js/contact-modal.js',
+        [],
+        file_exists( $contact_modal_js ) ? filemtime( $contact_modal_js ) : wp_get_theme()->get('Version'),
+        true
+    );
 }
 add_action( 'wp_enqueue_scripts', 'global_fukuo_enqueue' );

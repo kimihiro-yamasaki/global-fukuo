@@ -12,9 +12,11 @@
   <header class="site-header">
     <a href="<?php echo esc_url( home_url('/') ); ?>" class="site-logo">
       <img
-        src="<?php echo esc_url( get_template_directory_uri() . '/images/hobby-select-logo-cream.jpg' ); ?>"
+        src="<?php echo esc_url( get_template_directory_uri() . '/images/hobby-select-logo-round.png' ); ?>"
         alt="Hobby Select"
         class="site-logo__img"
+        width="400"
+        height="400"
       >
     </a>
     <div class="header-actions">
